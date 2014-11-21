@@ -121,6 +121,7 @@ namespace zmq
         void event_close_failed (const std::string &addr_, int fd_);
         void event_disconnected (const std::string &addr_, int fd_);
         void event_subscribed (const std::string &sub_, int fd_);
+        void event_unsubscribed (const std::string &sub_, int fd_);
 
     protected:
 

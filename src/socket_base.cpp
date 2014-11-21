@@ -1314,8 +1314,14 @@ void zmq::socket_base_t::event_disconnected (const std::string &addr_, int fd_)
 
 void zmq::socket_base_t::event_subscribed (const std::string &sub_, int fd_)
 {
-    if (monitor_events & ZMQ_EVENT_SUBSCRIPTION)
-        monitor_event (ZMQ_EVENT_SUBSCRIPTION, fd_, sub_);
+    if (monitor_events & ZMQ_EVENT_SUBSCRIBED)
+        monitor_event (ZMQ_EVENT_SUBSCRIBED, fd_, sub_);
+}
+
+void zmq::socket_base_t::event_unsubscribed (const std::string &sub_, int fd_)
+{
+    if (monitor_events & ZMQ_EVENT_UNSUBSCRIBED)
+        monitor_event (ZMQ_EVENT_UNSUBSCRIBED, fd_, sub_);
 }
 
 //  Send a monitor event

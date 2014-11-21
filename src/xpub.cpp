@@ -64,6 +64,7 @@ void zmq::xpub_t::xread_activated (pipe_t *pipe_)
             bool unique;
             if (*data == 0) {
                 unique = subscriptions.rm (data + 1, size - 1, pipe_);
+                event_unsubscribed(std::string((char*)(data + 1), size - 1), fd());
             } else {
                 unique = subscriptions.add (data + 1, size - 1, pipe_);
                 event_subscribed(std::string((char*)(data + 1), size - 1), fd());
