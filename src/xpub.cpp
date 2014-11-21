@@ -62,10 +62,12 @@ void zmq::xpub_t::xread_activated (pipe_t *pipe_)
         const size_t size = sub.size ();
         if (size > 0 && (*data == 0 || *data == 1)) {
             bool unique;
-            if (*data == 0)
+            if (*data == 0) {
                 unique = subscriptions.rm (data + 1, size - 1, pipe_);
-            else
+            } else {
                 unique = subscriptions.add (data + 1, size - 1, pipe_);
+                event_subscribed(std::string((char*)(data + 1), size - 1), fd());
+            }
 
             //  If the subscription is not a duplicate store it so that it can be
             //  passed to used on next recv call. (Unsubscribe is not verbose.)
